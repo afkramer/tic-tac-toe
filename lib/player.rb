@@ -1,23 +1,26 @@
 # player.rb
 
 class Player
-  attr_reader :name, :player_num, :symbol
+  attr_reader :name, :player_num, :symbol, :has_turn
+  attr_writer :has_turn
 
-  def initialize(name, player_num, symbol)
+  def initialize(name, symbol)
     @name = name
-    @player_num = player_num
     @symbol = symbol
-    @has_turn = @symbol == 'X' ? true : false
+    @has_turn = @symbol == 'X'
   end
 
-  def get_move_row
-    puts "Which row would you like to place your #{@symbol} in?"
-    gets.chomp
+  def move(gui, board)
+    loop do
+      grid_selection = gui.get_move(@name, @symbol)
+      if grid_selection < 1 || grid_selection > 9
+        gui.selection_not_allowed
+      elsif board.check_spot_available(grid_selection) == true
+        board.update_board(grid_selection, @symbol)
+        break
+      else
+        gui.move_not_available
+      end
+    end
   end
-  
-  def get_move_col
-    puts "Which column would you like to place your #{symbol} in?"
-    gets.chomp
-  end
-
 end

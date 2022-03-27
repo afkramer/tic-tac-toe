@@ -4,11 +4,21 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = Array.new(3) { Array.new(3) }
+    @board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
   end
 
-  def update_board(row, col, symbol)
-    @board[row][col] = symbol
+  def update_board(num, symbol)
+    @board.each_with_index do |row, row_index|
+      row.each_with_index do |element, col_index|
+        @board[row_index][col_index] = symbol if element == num
+      end
+    end
+  end
+
+  def check_spot_available(num)
+    @board.any? do |row|
+      row.any? { |element| element == num }
+    end
   end
 
   def winner_rows?(symbol)
@@ -27,6 +37,16 @@ class Board
 
   def winner_diagonal?(symbol)
     (@board[0][0] == symbol && @board[1][1] == symbol && @board[2][2] == symbol) || 
-    (@board[0][2] == symbol && @board[1][1] == symbol && @board[2][0] == symbol)
+      (@board[0][2] == symbol && @board[1][1] == symbol && @board[2][0] == symbol)
+  end
+
+  def winner?(symbol)
+    winner_rows?(symbol) || winner_cols?(symbol) || winner_diagonal?(symbol)
+  end
+
+  def stalemate?
+    @board.all? do |row|
+      row.all? { |element| element == 'X' || element == 'O' }
+    end
   end
 end
