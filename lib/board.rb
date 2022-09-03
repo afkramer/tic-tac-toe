@@ -1,5 +1,6 @@
 # board.rb
 
+# Class for creating the board, making moves and checking if there is a winner
 class Board
   attr_reader :board
 
@@ -27,7 +28,8 @@ class Board
 
   def stalemate?
     @board.all? do |row|
-      row.all? { |element| element == 'X' || element == 'O' }
+      # row.all? { |element| element == 'X' || element == 'O' }
+      row.all? { |element| %w[X O].include?(element) }
     end
   end
 
