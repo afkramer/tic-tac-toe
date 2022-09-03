@@ -2,7 +2,7 @@
 
 # main.rb
 
-require_relative 'game.rb'
+require_relative '../lib/game'
 
 def main
   game = Game.new

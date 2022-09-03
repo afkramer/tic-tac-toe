@@ -1,9 +1,9 @@
 # game.rb
 
 #require 'pry-byebug'
-require './board'
-require './player'
-require './gui'
+require_relative './board'
+require_relative './player'
+require_relative './gui'
 
 class Game
   def initialize
