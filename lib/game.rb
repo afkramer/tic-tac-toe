@@ -1,6 +1,6 @@
 # game.rb
 
-require 'pry-byebug'
+#require 'pry-byebug'
 require './board'
 require './player'
 require './gui'
@@ -64,10 +64,3 @@ class Game
     end
   end
 end
-
-def main
-  game = Game.new
-  game.run
-end
-
-main
