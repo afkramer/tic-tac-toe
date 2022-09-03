@@ -21,6 +21,18 @@ class Board
     end
   end
 
+  def winner?(symbol)
+    winner_rows?(symbol) || winner_cols?(symbol) || winner_diagonal?(symbol)
+  end
+
+  def stalemate?
+    @board.all? do |row|
+      row.all? { |element| element == 'X' || element == 'O' }
+    end
+  end
+
+  private
+
   def winner_rows?(symbol)
     @board.any? do |row|
       row.all? { |cell| cell == symbol }
@@ -38,15 +50,5 @@ class Board
   def winner_diagonal?(symbol)
     (@board[0][0] == symbol && @board[1][1] == symbol && @board[2][2] == symbol) || 
       (@board[0][2] == symbol && @board[1][1] == symbol && @board[2][0] == symbol)
-  end
-
-  def winner?(symbol)
-    winner_rows?(symbol) || winner_cols?(symbol) || winner_diagonal?(symbol)
-  end
-
-  def stalemate?
-    @board.all? do |row|
-      row.all? { |element| element == 'X' || element == 'O' }
-    end
   end
 end
