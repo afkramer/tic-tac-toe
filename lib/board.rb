@@ -27,6 +27,8 @@ class Board
   end
 
   def stalemate?
+    return false if winner?('X') || winner?('O')
+    
     @board.all? do |row|
       row.all? { |element| %w[X O].include?(element) }
     end

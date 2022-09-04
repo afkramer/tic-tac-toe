@@ -138,7 +138,7 @@ describe Board do
 
     context 'when all available spots are taken and there is no winner' do
       before do
-        board.instance_variable_set(:@board, [%w[X X X], %w[O X X], %w[O O O]])
+        board.instance_variable_set(:@board, [%w[X O X], %w[O X X], %w[O X O]])
       end
 
       it 'returns true' do
@@ -152,7 +152,7 @@ describe Board do
         board.instance_variable_set(:@board, [%w[X X X], %w[X O O], %w[X O O]])
       end
 
-      it 'returns true' do
+      it 'returns false' do
         stalemate_result = board.stalemate?
         expect(stalemate_result).to be false
       end
