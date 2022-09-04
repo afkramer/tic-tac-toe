@@ -28,7 +28,6 @@ class Board
 
   def stalemate?
     @board.all? do |row|
-      # row.all? { |element| element == 'X' || element == 'O' }
       row.all? { |element| %w[X O].include?(element) }
     end
   end
