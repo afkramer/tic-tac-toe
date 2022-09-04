@@ -28,6 +28,17 @@ describe Board do
     end
   end
 
+  describe '#check_spot_available(num)' do
+    before do
+      board.instance_variable_set(:@board, [['O', 2, 'X'], [4, 'X', 6], [7, 8, 9]])
+    end
+
+    it "returns false when the spot has already been chosen by 'X'" do
+      check_spot_result = board.check_spot_available(3)
+      expect(check_spot_result).to be false
+    end
+  end
+
   describe '#winner?(symbol)' do
     context 'when winner uses symbol X and has a winning row' do
       before do
