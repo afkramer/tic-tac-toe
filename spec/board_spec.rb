@@ -37,6 +37,16 @@ describe Board do
       check_spot_result = board.check_spot_available(3)
       expect(check_spot_result).to be false
     end
+
+    it "returns false when the spot has already been chosen by 'O'" do
+      check_spot_result = board.check_spot_available(1)
+      expect(check_spot_result).to be false
+    end
+
+    it 'returns true when the spot is still available' do
+      check_spot_result = board.check_spot_available(8)
+      expect(check_spot_result).to be true
+    end
   end
 
   describe '#winner?(symbol)' do
