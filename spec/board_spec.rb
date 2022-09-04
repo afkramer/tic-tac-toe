@@ -5,8 +5,30 @@ require_relative '../lib/board'
 describe Board do
   subject(:board) { described_class.new }
 
-  describe '#winner?(symbol)' do
+  describe '#update_board(num, symbol)' do
+    context 'when chosen number is available' do
+      before do
+        board.instance_variable_set(:@board, [['X', 2, 3], [4, 'O', 6], [7, 8, 'X']])
+      end
 
+      it "updates board at the correct position with symbol 'X'" do
+        board.update_board(8, 'X')
+        expect(board.instance_variable_get(:@board)).to eql([['X', 2, 3], [4, 'O', 6], [7, 'X', 'X']])
+      end
+
+      it "updates board at the correct position with symbol 'O'" do
+        board.update_board(2, 'O')
+        expect(board.instance_variable_get(:@board)).to eql([['X', 'O', 3], [4, 'O', 6], [7, 8, 'X']])
+      end
+
+      it 'does not update the board if the position is not available' do
+        board.update_board(1, 'O')
+        expect(board.instance_variable_get(:@board)).to eql([['X', 2, 3], [4, 'O', 6], [7, 8, 'X']])
+      end
+    end
+  end
+
+  describe '#winner?(symbol)' do
     context 'when winner uses symbol X and has a winning row' do
       before do
         board.instance_variable_set(:@board, [[1, 'O', 3], %w[X X X], [7, 'O', 9]])
@@ -135,7 +157,6 @@ describe Board do
   end
 
   describe '#stalemate?' do
-
     context 'when all available spots are taken and there is no winner' do
       before do
         board.instance_variable_set(:@board, [%w[X O X], %w[O X X], %w[O X O]])
@@ -150,6 +171,17 @@ describe Board do
     context 'when all available spots are taken and there is a winner' do
       before do
         board.instance_variable_set(:@board, [%w[X X X], %w[X O O], %w[X O O]])
+      end
+
+      it 'returns false' do
+        stalemate_result = board.stalemate?
+        expect(stalemate_result).to be false
+      end
+    end
+
+    context 'when there are still spots available' do
+      before do
+        board.instance_variable_set(:@board, [[1, 'X', 'O'], %w[X X O], %w[O O X]])
       end
 
       it 'returns false' do
