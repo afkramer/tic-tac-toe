@@ -146,5 +146,16 @@ describe Board do
         expect(stalemate_result).to be true
       end
     end
+
+    context 'when all available spots are taken and there is a winner' do
+      before do
+        board.instance_variable_set(:@board, [%w[X X X], %w[X O O], %w[X O O]])
+      end
+
+      it 'returns true' do
+        stalemate_result = board.stalemate?
+        expect(stalemate_result).to be false
+      end
+    end
   end
 end
