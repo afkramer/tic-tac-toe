@@ -90,5 +90,47 @@ describe Board do
         expect(winner_result).to be false
       end
     end
+
+    context "when winner user symbol 'X' and has a winning diagonal" do
+      before do
+        board.instance_variable_set(:@board, [['X', 'O', 3], ['O', 'X', 6], [7, 8, 'X']])
+      end
+
+      it "returns true when called with symbol 'X'" do
+        winner_result = board.winner?('X')
+        expect(winner_result).to be true
+      end
+
+      it "returns false when called with symbol 'O'" do
+        winner_result = board.winner?('O')
+        expect(winner_result).to be false
+      end
+
+      it "returns false when called with a symbol other than 'X' or 'O'" do
+        winner_result = board.winner?(5)
+        expect(winner_result).to be false
+      end
+    end
+
+    context "when winner uses symbol 'O' and has a winning diagonal" do
+      before do
+        board.instance_variable_set(:@board, [['X', 2, 'O'], ['X', 'O', 6], %w[O X X]])
+      end
+
+      it "returns true when called with symbol 'O'" do
+        winner_result = board.winner?('O')
+        expect(winner_result).to be true
+      end
+
+      it "returns false when called with symbol 'X'" do
+        winner_result = board.winner?('X')
+        expect(winner_result).to be false
+      end
+
+      it "returns false when called with a symbol other than 'X' or 'O'" do
+        winner_result = board.winner?('hello')
+        expect(winner_result).to be false
+      end
+    end
   end
 end
