@@ -6,11 +6,11 @@ require_relative './player'
 require_relative './gui'
 
 class Game
-  def initialize
-    @board = Board.new
-    @gui = Gui.new
-    @player1 = nil
-    @player2 = nil
+  def initialize(board: Board.new, gui: Gui.new, player1: nil, player2: nil)
+    @board = board
+    @gui = gui
+    @player1 = player1
+    @player2 = player2
   end
 
   def run
