@@ -41,8 +41,8 @@ class Game
   end
 
   def switch_current_player
-    @player1.has_turn = !@player1.has_turn
-    @player2.has_turn = !@player2.has_turn
+    @player1.switch_turn
+    @player2.switch_turn
   end
 
   def game_result(current_player)

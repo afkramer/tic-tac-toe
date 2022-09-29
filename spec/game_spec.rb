@@ -39,17 +39,10 @@ describe Game do
   end
 
   describe '#switch_current_player' do
-    context 'if player1 is up' do
-      before do
-        allow(player1).to receive(:has_turn).and_return(true)
-        allow(player2).to receive(:has_turn).and_return(false)
-      end
-
-      it 'returns player1' do
-        game.switch_current_player
-        expect(player1).to receive(:has_turn).with(false)
-        expect(player2).to receive(:has_turn).with(true)
-      end
+    it 'sends messages to both player instances' do
+      expect(player1).to receive(:switch_turn)
+      expect(player2).to receive(:switch_turn)
+      game.switch_current_player
     end
   end
 end
