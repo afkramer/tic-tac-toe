@@ -18,12 +18,23 @@ describe Game do
 
     context 'if player1 is up' do
       before do
-        allow(player1).to receive(has_turn).and_return(true)
+        allow(player1).to receive(:has_turn).and_return(true)
       end
 
       it 'returns player1' do
         current_player = game.determine_current_player
         expect(current_player).to eq(game.instance_variable_get(:@player1))
+      end
+    end
+
+    context 'if player2 is up' do
+      before do
+        allow(player1).to receive(:has_turn).and_return(false)
+      end
+
+      it 'returns player2' do
+        current_player = game.determine_current_player
+        expect(current_player).to eq(game.instance_variable_get(:@player2))
       end
     end
   end

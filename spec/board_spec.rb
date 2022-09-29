@@ -7,8 +7,12 @@ describe Board do
 
   describe '#update_board(num, symbol)' do
     context 'when chosen number is available' do
+      # Alternate setup to take advantage of how board is initialized
+      #board_setup = [['X', 2, 3], [4, 'O', 6], [7, 8, 'X']]
+      #subject(:board) { described_class.new(board_setup) }
+
       before do
-        board.instance_variable_set(:@board, [['X', 2, 3], [4, 'O', 6], [7, 8, 'X']])
+        board.instance_variable_set(:@board, [['X', 2, 3], [4, 'O', 6], [7, 8, 'X']]) 
       end
 
       it "updates board at the correct position with symbol 'X'" do
