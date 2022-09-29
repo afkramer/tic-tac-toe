@@ -10,6 +10,10 @@ class Player
     @has_turn = @symbol == 'X'
   end
 
+  def switch_turn
+    @has_turn = !@has_turn
+  end
+
   def move(gui, board)
     loop do
       grid_selection = gui.get_move(@name, @symbol)
