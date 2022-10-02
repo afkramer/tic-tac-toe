@@ -59,5 +59,18 @@ describe Game do
         expect(result).to eq('win')
       end
     end
+
+    context 'there is a stalemate' do
+      before do
+        allow(player2).to receive(:symbol).and_return('O')
+        allow(board).to receive(:winner?).and_return(false)
+        allow(board).to receive(:stalemate?).and_return(true)
+      end
+
+      it "returns 'stalemate'" do
+        result = game.game_result(player2)
+        expect(result).to eq('stalemate')
+      end
+    end
   end
 end
