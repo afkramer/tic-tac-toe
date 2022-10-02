@@ -6,7 +6,8 @@ require_relative '../lib/player'
 describe Game do
   let(:player1) { instance_double(Player) }
   let(:player2) { instance_double(Player) }
-  subject(:game) { described_class.new(player1: player1, player2: player2) }
+  let(:board) { instance_double(Board) }
+  subject(:game) { described_class.new(board: board, player1: player1, player2: player2) }
 
   describe '#play_game' do
     # TODO
@@ -43,6 +44,20 @@ describe Game do
       expect(player1).to receive(:switch_turn)
       expect(player2).to receive(:switch_turn)
       game.switch_current_player
+    end
+  end
+
+  describe '#game_result' do
+    context 'player1 is the winner' do
+      before do
+        allow(player1).to receive(:symbol).and_return('X')
+        allow(board).to receive(:winner?).and_return(true)
+      end
+
+      it "returns 'win'" do
+        result = game.game_result(player1)
+        expect(result).to eq('win')
+      end
     end
   end
 end

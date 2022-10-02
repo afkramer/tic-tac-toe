@@ -30,6 +30,7 @@ class Game
       current_player.move(@gui, @board)
       result = game_result(current_player)
       unless result.nil?
+        end_game(result, current_player)
         break
       end
       switch_current_player
@@ -47,10 +48,8 @@ class Game
 
   def game_result(current_player)
     if @board.winner?(current_player.symbol)
-      end_game('win', current_player)
       'win'
     elsif @board.stalemate?
-      end_game('stalemate', current_player)
       'stalemate'
     end
   end
