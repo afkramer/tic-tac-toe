@@ -7,7 +7,8 @@ describe Game do
   let(:player1) { instance_double(Player) }
   let(:player2) { instance_double(Player) }
   let(:board) { instance_double(Board) }
-  subject(:game) { described_class.new(board: board, player1: player1, player2: player2) }
+  let(:gui) { instance_double(Gui) }
+  subject(:game) { described_class.new(board: board, gui: gui, player1: player1, player2: player2) }
 
   describe '#play_game' do
     # TODO
@@ -70,6 +71,33 @@ describe Game do
       it "returns 'stalemate'" do
         result = game.game_result(player2)
         expect(result).to eq('stalemate')
+      end
+    end
+  end
+
+  describe '#end_game' do
+    context 'player2 is the winner' do
+      before do
+        allow(board).to receive(:board).and_return(board.instance_variable_get(:@board))
+      end
+
+      it 'displays the winner' do
+        expect(gui).to receive(:show_board)
+        expect(gui).to receive(:display_winner).with(player2)
+        game.end_game('win', player2)
+      end
+    end
+
+    context 'there is a stalemate' do
+      before do
+        # TODO: try putting this before do block after describe '#end_game'
+        allow(board).to receive(:board).and_return(board.instance_variable_get(:@board))
+      end
+
+      it 'displays a stalemate' do
+        expect(gui).to receive(:show_board)
+        expect(gui).to receive(:display_stalemate)
+        game.end_game('stalemate', player2)
       end
     end
   end
