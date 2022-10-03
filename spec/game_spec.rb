@@ -14,6 +14,12 @@ describe Game do
     # TODO
     # Test to make sure that loop ends when conditions are met
     # Test to make sure that messages are sent
+    context 'if there is no win or stalemate' do
+      before do
+      end
+      xit 'keeps looping' do
+      end
+    end
   end
 
   describe '#determine_current_player' do
@@ -76,11 +82,11 @@ describe Game do
   end
 
   describe '#end_game' do
-    context 'player2 is the winner' do
-      before do
-        allow(board).to receive(:board).and_return(board.instance_variable_get(:@board))
-      end
+    before do
+      allow(board).to receive(:board).and_return(board.instance_variable_get(:@board))
+    end
 
+    context 'player2 is the winner' do
       it 'displays the winner' do
         expect(gui).to receive(:show_board)
         expect(gui).to receive(:display_winner).with(player2)
@@ -89,11 +95,6 @@ describe Game do
     end
 
     context 'there is a stalemate' do
-      before do
-        # TODO: try putting this before do block after describe '#end_game'
-        allow(board).to receive(:board).and_return(board.instance_variable_get(:@board))
-      end
-
       it 'displays a stalemate' do
         expect(gui).to receive(:show_board)
         expect(gui).to receive(:display_stalemate)
