@@ -16,8 +16,20 @@ describe Game do
     # Test to make sure that messages are sent
     context 'if there is no win or stalemate' do
       before do
+        allow(game).to receive(:determine_current_player).and_return(player1)
+        allow(gui).to receive(:show_board)
+        allow(board).to receive(:board)
+        allow(player1).to receive(:move)
+        
+        result1 = nil
+        result2 = 'win'
+        allow(game).to receive(:game_result).with(player1).and_return(result1, result2)
       end
-      xit 'keeps looping' do
+
+      it 'keeps looping' do
+        expect(game).to receive(:switch_current_player).once
+        expect(game).to receive(:end_game).once
+        game.play_game
       end
     end
   end
