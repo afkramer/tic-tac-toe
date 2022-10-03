@@ -14,7 +14,7 @@ describe Game do
     # TODO
     # Test to make sure that loop ends when conditions are met
     # Test to make sure that messages are sent
-    context 'if there is no win or stalemate' do
+    context 'if there is one move and then a win' do
       before do
         allow(game).to receive(:determine_current_player).and_return(player1)
         allow(gui).to receive(:show_board)
@@ -26,7 +26,7 @@ describe Game do
         allow(game).to receive(:game_result).with(player1).and_return(result1, result2)
       end
 
-      it 'keeps looping' do
+      it 'loops once then ends game' do
         expect(game).to receive(:switch_current_player).once
         expect(game).to receive(:end_game).once
         game.play_game
