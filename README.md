@@ -15,3 +15,6 @@ One issue that I still have but couldn't come up with a cleaner solution was how
 I also ended up using two "loop do" loops. According to the curriculum this loop type is not used often, so I think perhaps I overlooked a better alternative.
 
 In addition, I am having trouble remembering to commit to Git often. In a team working with other developers this can really lead to problems. I tend to jump around and work on different methods in different classes at the same time, which makes it even more important to commit often.
+
+## Testing
+I revisited this project to add tests using Rspec. It was a great way to learn the syntax of Rspec and concentrate on what kinds of tests are necessary to have a good test suite. I ended up changing a few things here and there to be able to test more easily. All in all I think it will be a good basis for the next project, which is to implement Connect 4 using TDD principles.
