@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative '../lib/game'
-require_relative '../lib/player'
 
 describe Game do
   let(:player1) { instance_double(Player) }
@@ -20,15 +19,19 @@ describe Game do
         allow(gui).to receive(:show_board)
         allow(board).to receive(:board)
         allow(player1).to receive(:move)
-        
+
         result1 = nil
         result2 = 'win'
         allow(game).to receive(:game_result).with(player1).and_return(result1, result2)
       end
 
       it 'loops once then ends game' do
-        expect(game).to receive(:switch_current_player).once
-        expect(game).to receive(:end_game).once
+
+        aggregate_failures 'testing_response' do
+          expect(game).to receive(:switch_current_player).once
+          expect(game).to receive(:end_game).once
+        end
+
         game.play_game
       end
     end
