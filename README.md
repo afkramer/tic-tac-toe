@@ -1,6 +1,6 @@
 # tic-tac-toe
 My solution to the tic-tac-toe project in The Odin Project Ruby path.
-To play the game, run "ruby game.rb" in the command line.
+To play the game, go to https://replit.com/@afkramer/tic-tac-toe#.replit
 
 ## What I learned
 This project was to highlight working with OOP in Ruby. My focus was on creating classes to represent various features of the game (Board, Player, Game, Gui).
